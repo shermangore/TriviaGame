@@ -1,0 +1,157 @@
+<!--
+Overview
+
+In this assignment, You'll create a Trivia game using JavaScript for the logic and jQuery to manipulate HTML. Be sure to layout this app with valid HTML and stylish CSS.
+Remember
+
+You will be fully capable of doing this homework by the end of Saturday's class.
+Before You Begin
+
+Create a GitHub repo called TriviaGame, then clone the repo to your computer.
+Create a file inside of the TriviaGame folder called index.html. This is where you'll mark up all of your HTML.
+Don't forget to include a script tag with the jQuery library.
+Create a folder inside of the TriviaGame folder called assets.
+Inside assets, create three folders: css, javascript, images
+In your css folder, create a style.css file.
+In your javascript folder, create an app.js file; here you'll write all of your JavaScript and jQuery.
+In your images folder, save whatever images you'd like to use in this exercise.
+
+
+You'll create a trivia game that shows only one question until the player answers it or their time runs out.
+If the player selects the correct answer, show a screen congratulating them for choosing the right option. After a few seconds, display the next question -- do this without user input.
+The scenario is similar for wrong answers and time-outs.
+If the player runs out of time, tell the player that time's up and display the correct answer. Wait a few seconds, then show the next question.
+If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.
+On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
+A Few Last Notes
+
+Styling and theme are completely up to you. Get creative!
+*If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
+Good Luck!
+
+
+1) shows only one question until the player answers it or their time runs out
+2) If the player selects the correct answer, show a screen congratulating them for choosing the right option
+3) After a few seconds, display the next question  ***do this without user input***
+4) The scenario is similar for wrong answers and time-outs.
+5) If the player runs out of time, tell the player that time's up and display the correct answer.
+6) Wait a few seconds, then show the next question.
+7) If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer.
+8) Wait a few seconds, then show the next question.
+9) On the final screen, show:
+	a) number of correct answers
+	b) number of incorrect answers
+	c) an option to restart the game (without reloading the page)
+10) Styling and theme are completely up to you. Get creative!
+-->
+
+<!-- HTML
+Create header and body
+Within body, create spaces for:
+	- Time Remaining
+	- Question
+	- Multiple Choice Answers
+-->
+
+<!-- JS
+Start/reset the game
+Display the question
+Display the answer choices
+Start the timer
+Get the event (mouse click or corresponding key press - a, b, c, d)
+Verify guess to answer
+If correct, show congrats message for X seconds
+Show next question
+If incorrect, show error message and highlight correct answer for X seconds
+If out-of-time, show time's up message and highlight the correct answer for X seconds
+When all questions have been asked/answered, show message with stats (correct/incorrect) and a restart button/option
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Trivia</title>
+	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="assets/javascript/app.js"></script>
+	<script>
+		let gameTimer = 5;
+		let arrQuestions = [
+			{
+				"question": "Inside which HTML element is the <link rel='stylesheet' href'assets/css/style.css'> tag directly placed?",
+				"correct-answer": "<head>",
+				"incorrect-answer-1": "<footer>",
+				"incorrect-answer-2": "<javascript>",
+				"incorrect-answer-3": "<html>",
+				"difficulty": 2
+			},
+			{
+				"question": "Which is the correct code to get the source of the following image tag: <img src='assets/images/flying-goat.jpg' id='goatImg' alt='flying goat pic' />?",
+				"correct-answer": "$('#goatImg').attr('src');",
+				"incorrect-answer-1": "document.getElementsByName('goatImg').src();",
+				"incorrect-answer-2": "$('.goatImg').src();",
+				"incorrect-answer-3": "$(getImageSource).('goatImg').val();",
+				"difficulty": 3
+			},
+			{
+				"question": "The console.log command is used to communicate with whom?",
+				"correct-answer": "Developers",
+				"incorrect-answer-1": "The Open Standards Body",
+				"incorrect-answer-2": "Users",
+				"incorrect-answer-3": "Microsoft",
+				"difficulty": 1
+			},
+			{
+				"question": "How many text parameters does this function have: var myGrades = getGrades('Billy Mays', 'Sophmore', 17, false);?",
+				"correct-answer": "2",
+				"incorrect-answer-1": "5",
+				"incorrect-answer-2": "3",
+				"incorrect-answer-3": "1",
+				"difficulty": 3
+			}
+		];
+		$(document).ready(function() {
+			function resetTimer() {
+				let newInterval = setInterval(function() {
+					$("#spnTimer").text(gameTimer);
+
+					gameTimer--;
+
+					if (gameTimer < 0) {
+						clearInterval(newInterval)
+						console.log("Yo");
+					}
+				}, 1000);
+			}
+
+			resetTimer();
+		});
+
+	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1 class="title">JavaScript Trivia</h1>
+		</div>
+		<div class="row">
+			<h3 class="timer">Time Remaining: <span id="spnTimer"></span></h3>
+		</div>
+		<div class="row">
+			<p class="question"></p>
+		</div>
+		<div class="row">
+			<ul class="list-group">
+				<li class="list-group-item" id="answer-1"></li>
+				<li class="list-group-item" id="answer-2"></li>
+				<li class="list-group-item" id="answer-3"></li>
+				<li class="list-group-item" id="answer-4"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
