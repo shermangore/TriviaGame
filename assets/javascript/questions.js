@@ -14,7 +14,7 @@
 				"incorrectAnswer2": "$('.goatImg').src();",
 				"incorrectAnswer3": "$(getImageSource).('goatImg').val();",
 				"difficulty": 3
-			},
+			}/*,
 			{
 				"question": "The console.log command is used to communicate with whom?",
 				"correctAnswer": "Developers",
@@ -78,5 +78,21 @@
 				"incorrectAnswer2": "Tells a function to run at a certain time of day",
 				"incorrectAnswer3": "Modifies the styling of text to make the spacing between letters consistent",
 				"difficulty": 2
-			}
+			},
+			{
+				"question": "Which book is Douglas Crawford famous for writing?",
+				"correctAnswer": "JavaScript: The Good Parts",
+				"incorrectAnswer1": "Data Structures &amp; Algorithms with JavaScript",
+				"incorrectAnswer2": "Functional JavaScript",
+				"incorrectAnswer3": "JavaScript For Dummmies",
+				"difficulty": 1
+			},
+			{
+				"question": "Who wrote the &quot;You Don't Know JS&quot; series of books?",
+				"correctAnswer": "Kyle Simpson",
+				"incorrectAnswer1": "Douglas Crawford",
+				"incorrectAnswer2": "Randy Savage",
+				"incorrectAnswer3": "Lee Morgan",
+				"difficulty": 2
+			}*/
 		];

@@ -76,41 +76,39 @@ When all questions have been asked/answered, show message with stats (correct/in
 	<script src="assets/javascript/app.js"></script>
 	<script src="assets/javascript/questions.js"></script>
 	<script>
-		let gamePeriod = 10;
+		let gamePeriod = 2;
 		let gameTimer = 0;
-		let numCorrect = 0;
-		let numWrong = 0;
-		let askedCount = 0;
+		let askedQuestions = [];
 		let answer = "";
 		let newInterval;
 
 		$(document).ready(function() {
-			askedCount = arrQuestions.length;
-			
-			$("#pnlQuestions").show();
-			$("#pnlScore").hide();
+			$(".list-group-item").on("click", function (e) {
+				let result = checkAnswer(e.target.id);
+				//console.log(e.target.id);
+			});
 
-			function startTimer() {
+			function resetTimer() {
 				gameTimer = gamePeriod;
+				setQuestion();
 
 				newInterval = setInterval(function() {
-					if (gameTimer >= 0) {
-						$("#spnTimer").text(gameTimer);
-						gameTimer--;
-					} else {
-						stopTimer();
+					$("#spnTimer").text(gameTimer);
+					gameTimer--;
+
+					if (gameTimer < 0 && arrQuestions.length > 0) {
+						clearInterval(newInterval);
+						console.log(arrQuestions.length);
+						setTimeout(resetTimer, 1500);
+					} else if (arrQuestions.length <= 0) {
+						clearInterval(newInterval);
+						$("#spnTimer").text("--");
 					}
 				}, 1000);
 			}
 
-			function stopTimer() {
-				clearInterval(newInterval);
-				$("#spnTimer").text("--");
-			}
-
 			function setQuestion() {
 				let rndQ = Math.floor(Math.random() * (arrQuestions.length ));
-
 				if (arrQuestions.length > 0) {
 					$(".question").html(arrQuestions[rndQ].question);
 
@@ -159,47 +157,18 @@ When all questions have been asked/answered, show message with stats (correct/in
 				}
 			}
 
-			startTimer();
-			setQuestion();
-
-			$(".list-group-item").on("click", function (e) {
-				let result = checkAnswer(e.target.id);
-
-				if (result) {
-					numCorrect++;
-
-				} else {
-					numWrong++;
-				}
-
-				setTimeout(function() {
-					if (arrQuestions.length > 0) {
-						stopTimer();
-						setQuestion();
-						startTimer();
-					} else {
-						showScore();
-					}
-				}, 500);
-			});
+			resetTimer();
 
 		});
 
 		function checkAnswer(obj) {
 			if (obj === answer) {
+				console.log("YAY");
 				clearInterval(newInterval);
 				return true;
 			} else {
 				return false;
 			}
-		}
-
-		function showScore() {
-			$("#correct").text(numCorrect);
-			$("#wrong").text(numWrong);
-			$("#asked").text(askedCount);
-			$("#pnlQuestions").hide();
-			$("#pnlScore").show();
 		}
 	</script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -210,28 +179,21 @@ When all questions have been asked/answered, show message with stats (correct/in
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="jumbotron text-center">JavaScript Trivia</div>
+			<h1 class="title">JavaScript Trivia</h1>
 		</div>
-		<div class="panel panel-body" id="pnlQuestions">
-			<div class="row">
-				<h3 class="timer">Time Remaining: <span id="spnTimer"></span></h3>
-			</div>
-			<div class="row">
-				<p class="question"></p>
-			</div>
-			<div class="row">
-				<ul class="list-group">
-					<li class="list-group-item" id="answer-1"></li>
-					<li class="list-group-item" id="answer-2"></li>
-					<li class="list-group-item" id="answer-3"></li>
-					<li class="list-group-item" id="answer-4"></li>
-				</ul>
-			</div>
+		<div class="row">
+			<h3 class="timer">Time Remaining: <span id="spnTimer"></span></h3>
 		</div>
-		<div class="panel panel-body" id="pnlScore">
-			Correct: <div id="correct"></div>
-			Wrong: <div id="wrong"></div>
-			Asked: <div id="asked"></div>
+		<div class="row">
+			<p class="question"></p>
+		</div>
+		<div class="row">
+			<ul class="list-group">
+				<li class="list-group-item" id="answer-1"></li>
+				<li class="list-group-item" id="answer-2"></li>
+				<li class="list-group-item" id="answer-3"></li>
+				<li class="list-group-item" id="answer-4"></li>
+			</ul>
 		</div>
 	</div>
 </body>
