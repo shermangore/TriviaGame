@@ -74,43 +74,18 @@ When all questions have been asked/answered, show message with stats (correct/in
 	<title>Trivia</title>
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script src="assets/javascript/app.js"></script>
+	<script src="assets/javascript/questions.js"></script>
 	<script>
-		let gameTimer = 5;
-		let arrQuestions = [
-			{
-				"question": "Inside which HTML element is the <link rel='stylesheet' href'assets/css/style.css'> tag directly placed?",
-				"correct-answer": "<head>",
-				"incorrect-answer-1": "<footer>",
-				"incorrect-answer-2": "<javascript>",
-				"incorrect-answer-3": "<html>",
-				"difficulty": 2
-			},
-			{
-				"question": "Which is the correct code to get the source of the following image tag: <img src='assets/images/flying-goat.jpg' id='goatImg' alt='flying goat pic' />?",
-				"correct-answer": "$('#goatImg').attr('src');",
-				"incorrect-answer-1": "document.getElementsByName('goatImg').src();",
-				"incorrect-answer-2": "$('.goatImg').src();",
-				"incorrect-answer-3": "$(getImageSource).('goatImg').val();",
-				"difficulty": 3
-			},
-			{
-				"question": "The console.log command is used to communicate with whom?",
-				"correct-answer": "Developers",
-				"incorrect-answer-1": "The Open Standards Body",
-				"incorrect-answer-2": "Users",
-				"incorrect-answer-3": "Microsoft",
-				"difficulty": 1
-			},
-			{
-				"question": "How many text parameters does this function have: var myGrades = getGrades('Billy Mays', 'Sophmore', 17, false);?",
-				"correct-answer": "2",
-				"incorrect-answer-1": "5",
-				"incorrect-answer-2": "3",
-				"incorrect-answer-3": "1",
-				"difficulty": 3
-			}
-		];
+		let gameTimer = 2;
+		let askedQuestions = [];
+		let answer = "";
+
 		$(document).ready(function() {
+			$(".list-group-item").on("click", function (e) {
+				checkAnswer(e.target.id);
+				//console.log(e.target.id);
+			});
+
 			function resetTimer() {
 				let newInterval = setInterval(function() {
 					$("#spnTimer").text(gameTimer);
@@ -118,15 +93,69 @@ When all questions have been asked/answered, show message with stats (correct/in
 					gameTimer--;
 
 					if (gameTimer < 0) {
-						clearInterval(newInterval)
+						clearInterval(newInterval);
+						setQuestion();
 						console.log("Yo");
 					}
 				}, 1000);
 			}
 
+			function setQuestion() {
+				let rndQ = Math.floor(Math.random() * (arrQuestions.length - 1)) + 1;
+
+				$(".question").html(arrQuestions[rndQ].question);
+
+				for (let i = 0; i < 4; i++) {
+					let rndA = Math.floor(Math.random() * (i + 1)) + 1;
+
+					switch (rndA) {
+						case 0:
+							answer = "answer-1";
+
+							$("#answer-1").text(arrQuestions[rndQ].correctAnswer);
+							$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer1);
+							$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer2);
+							$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
+							break;
+						case 1:
+							answer = "answer-2";
+							
+							$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
+							$("#answer-2").text(arrQuestions[rndQ].correctAnswer);
+							$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer2);
+							$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
+							break;
+						case 2:
+							answer = "answer-3";
+							
+							$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
+							$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer2);
+							$("#answer-3").text(arrQuestions[rndQ].correctAnswer);
+							$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
+							break;
+						case 3:
+							answer = "answer-4";
+							
+							$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
+							$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer2);
+							$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer3);
+							$("#answer-4").text(arrQuestions[rndQ].correctAnswer);
+							break;
+						default:
+							break;
+					}
+				}
+
+				arrQuestions.splice(rndQ, 1);
+			}
 			resetTimer();
 		});
 
+		function checkAnswer(obj) {
+			if (obj === answer) {
+				console.log("YAY");
+			}
+		}
 	</script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<style>
