@@ -72,166 +72,58 @@ When all questions have been asked/answered, show message with stats (correct/in
 <head>
 	<meta charset="UTF-8">
 	<title>Trivia</title>
+
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script src="assets/javascript/app.js"></script>
 	<script src="assets/javascript/questions.js"></script>
-	<script>
-		let gamePeriod = 10;
-		let gameTimer = 0;
-		let numCorrect = 0;
-		let numWrong = 0;
-		let askedCount = 0;
-		let answer = "";
-		let newInterval;
 
-		$(document).ready(function() {
-			askedCount = arrQuestions.length;
-			
-			$("#pnlQuestions").show();
-			$("#pnlScore").hide();
-
-			function startTimer() {
-				gameTimer = gamePeriod;
-
-				newInterval = setInterval(function() {
-					if (gameTimer >= 0) {
-						$("#spnTimer").text(gameTimer);
-						gameTimer--;
-					} else {
-						stopTimer();
-					}
-				}, 1000);
-			}
-
-			function stopTimer() {
-				clearInterval(newInterval);
-				$("#spnTimer").text("--");
-			}
-
-			function setQuestion() {
-				let rndQ = Math.floor(Math.random() * (arrQuestions.length ));
-
-				if (arrQuestions.length > 0) {
-					$(".question").html(arrQuestions[rndQ].question);
-
-					for (let i = 0; i < 4; i++) {
-						let rndA = Math.floor(Math.random() * (i + 1)) + 1;
-
-						switch (rndA) {
-							case 0:
-								answer = "answer-1";
-
-								$("#answer-1").text(arrQuestions[rndQ].correctAnswer);
-								$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer1);
-								$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer2);
-								$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
-								break;
-							case 1:
-								answer = "answer-2";
-								
-								$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
-								$("#answer-2").text(arrQuestions[rndQ].correctAnswer);
-								$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer2);
-								$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
-								break;
-							case 2:
-								answer = "answer-3";
-								
-								$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
-								$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer2);
-								$("#answer-3").text(arrQuestions[rndQ].correctAnswer);
-								$("#answer-4").text(arrQuestions[rndQ].incorrectAnswer3);
-								break;
-							case 3:
-								answer = "answer-4";
-								
-								$("#answer-1").text(arrQuestions[rndQ].incorrectAnswer1);
-								$("#answer-2").text(arrQuestions[rndQ].incorrectAnswer2);
-								$("#answer-3").text(arrQuestions[rndQ].incorrectAnswer3);
-								$("#answer-4").text(arrQuestions[rndQ].correctAnswer);
-								break;
-							default:
-								break;
-						}
-					}
-
-					arrQuestions.splice(rndQ, 1);
-				}
-			}
-
-			startTimer();
-			setQuestion();
-
-			$(".list-group-item").on("click", function (e) {
-				let result = checkAnswer(e.target.id);
-
-				if (result) {
-					numCorrect++;
-
-				} else {
-					numWrong++;
-				}
-
-				setTimeout(function() {
-					if (arrQuestions.length > 0) {
-						stopTimer();
-						setQuestion();
-						startTimer();
-					} else {
-						showScore();
-					}
-				}, 500);
-			});
-
-		});
-
-		function checkAnswer(obj) {
-			if (obj === answer) {
-				clearInterval(newInterval);
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		function showScore() {
-			$("#correct").text(numCorrect);
-			$("#wrong").text(numWrong);
-			$("#asked").text(askedCount);
-			$("#pnlQuestions").hide();
-			$("#pnlScore").show();
-		}
-	</script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<style>
-		
-	</style>
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="jumbotron text-center">JavaScript Trivia</div>
+			<div class="jumbotron text-center">
+				<h1>JavaScript Trivia</h1>
+			</div>
 		</div>
-		<div class="panel panel-body" id="pnlQuestions">
-			<div class="row">
+		<div class="panel panel-default" id="pnlQuestions">
+			<div class="panel-heading text-center">
 				<h3 class="timer">Time Remaining: <span id="spnTimer"></span></h3>
 			</div>
-			<div class="row">
-				<p class="question"></p>
-			</div>
-			<div class="row">
-				<ul class="list-group">
-					<li class="list-group-item" id="answer-1"></li>
-					<li class="list-group-item" id="answer-2"></li>
-					<li class="list-group-item" id="answer-3"></li>
-					<li class="list-group-item" id="answer-4"></li>
-				</ul>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10">
+						<p class="question"></p>
+					</div>
+					<div class="col-lg-1"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10">
+						<ul class="list-group">
+							<li class="list-group-item" id="answer-1"></li>
+							<li class="list-group-item" id="answer-2"></li>
+							<li class="list-group-item" id="answer-3"></li>
+							<li class="list-group-item" id="answer-4"></li>
+						</ul>
+					</div>
+					<div class="col-lg-1"></div>
+				</div>
 			</div>
 		</div>
 		<div class="panel panel-body" id="pnlScore">
-			Correct: <div id="correct"></div>
-			Wrong: <div id="wrong"></div>
-			Asked: <div id="asked"></div>
+			<div class="row" id="rowResultsLabel">
+				<div class="col-lg-4">Correct</div>
+				<div class="col-lg-4">Wrong</div>
+				<div class="col-lg-4">Asked</div>
+			</div>
+			<div class="row" id="rowResults">
+				<div class="col-lg-4"><div id="correct"></div></div>
+				<div class="col-lg-4"><div id="wrong"></div></div>
+				<div class="col-lg-4"><div id="asked"></div></div>
+			</div>
 		</div>
 	</div>
 </body>
