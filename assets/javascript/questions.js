@@ -14,7 +14,7 @@
 				"incorrectAnswer2": "$('.goatImg').src();",
 				"incorrectAnswer3": "$(getImageSource).('goatImg').val();",
 				"difficulty": 3
-			}/*,
+			},
 			{
 				"question": "The console.log command is used to communicate with whom?",
 				"correctAnswer": "Developers",
@@ -94,5 +94,5 @@
 				"incorrectAnswer2": "Randy Savage",
 				"incorrectAnswer3": "Lee Morgan",
 				"difficulty": 2
-			}*/
+			}
 		];
