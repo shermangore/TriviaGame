@@ -73,7 +73,15 @@
 			},
 			{
 				"question": "What does the setInterval function do?",
-				"correctAnswer": "Tells a function to execute every n seconds",
+				"correctAnswer": "Tells a function to execute every n milliseconds",
+				"incorrectAnswer1": "Tells a function to pause for a specific number of milliseconds",
+				"incorrectAnswer2": "Tells a function to run at a certain time of day",
+				"incorrectAnswer3": "Modifies the styling of text to make the spacing between letters consistent",
+				"difficulty": 2
+			},
+			{
+				"question": "What does the setTimeout function do?",
+				"correctAnswer": "Tells a function to execute every n milliseconds",
 				"incorrectAnswer1": "Tells a function to pause for a specific number of milliseconds",
 				"incorrectAnswer2": "Tells a function to run at a certain time of day",
 				"incorrectAnswer3": "Modifies the styling of text to make the spacing between letters consistent",
