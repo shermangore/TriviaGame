@@ -48,7 +48,7 @@
 				"difficulty": 2
 			},
 			{
-				"question": "In What order with the numbers 1 - 4 be logged in the following function? <br /><code>(function() { <br />&nbsp;&nbsp;console.log(1); <br />&nbsp;&nbsp;setTimeout(function(){<br />&nbsp;&nbsp;&nbsp;&nbsp;console.log(2)<br />&nbsp;&nbsp;}, 1000);<br />&nbsp;&nbsp;setTimeout(function(){<br />&nbsp;&nbsp;&nbsp;&nbsp;console.log(3)<br />&nbsp;&nbsp;}, 0);<br />&nbsp;&nbsp;console.log(4);<br /> });</code>",
+				"question": "In What order will the numbers 1 - 4 be logged in the following function? <br /><code>(function() { <br />&nbsp;&nbsp;console.log(1); <br />&nbsp;&nbsp;setTimeout(function(){<br />&nbsp;&nbsp;&nbsp;&nbsp;console.log(2)<br />&nbsp;&nbsp;}, 1000);<br />&nbsp;&nbsp;setTimeout(function(){<br />&nbsp;&nbsp;&nbsp;&nbsp;console.log(3)<br />&nbsp;&nbsp;}, 0);<br />&nbsp;&nbsp;console.log(4);<br /> });</code>",
 				"correctAnswer": "1, 4, 3, 2",
 				"incorrectAnswer1": "1, 2, 3, 4",
 				"incorrectAnswer2": "1, 3, 4, 2",

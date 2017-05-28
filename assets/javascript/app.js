@@ -1,4 +1,4 @@
-let gamePeriod = 10;
+let gamePeriod = 20;
 let gameTimer = 0;
 let numCorrect = 0;
 let numWrong = 0;
@@ -26,6 +26,7 @@ $(document).ready(function() {
 			} else {
 				numWrong++;
 				stopTimer();
+				setQuestion();
 			}
 		}, 1000);
 	}
@@ -36,7 +37,7 @@ $(document).ready(function() {
 
 		if (arrQuestions.length > 0) {
 			startTimer();
-			setQuestion();
+			//setQuestion();
 		} else {
 			clearInterval(newInterval);
 			showScore();
@@ -44,7 +45,8 @@ $(document).ready(function() {
 	}
 
 	function setQuestion() {
-		let rndQ = Math.floor(Math.random() * (arrQuestions.length ));
+		let rndQ = Math.floor(Math.random() * (arrQuestions.length));
+		console.log(arrQuestions.length);
 
 		if (arrQuestions.length > 0) {
 			$(".question").html(arrQuestions[rndQ].question);
