@@ -46,7 +46,6 @@ $(document).ready(function() {
 
 	function setQuestion() {
 		let rndQ = Math.floor(Math.random() * (arrQuestions.length));
-		console.log(arrQuestions.length);
 
 		if (arrQuestions.length > 0) {
 			$(".question").html(arrQuestions[rndQ].question);
